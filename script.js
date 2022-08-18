@@ -25,6 +25,27 @@ function returnToHome() {
     main.style.display = 'unset'
 
 }
+function Book(title, author, pages, comment) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.comment = comment;
+  }v
+  
+  function getUserInput() {
+  let titleText = title.value;
+  let authorText = author.value;
+  let pageNumber = page.value;
+  let commentValue = getReadValue();
+  let newBook = new Book(titleText, authorText, pageNumber, commentValue);
+  myLibrary.push(newBook);
+  }
+  
+  function getReadValue() {
+    if(document.querySelector("input[name='read-book']:checked").value == 'yes') return true;
+    else return false;
+  }
+  
 
 
 
