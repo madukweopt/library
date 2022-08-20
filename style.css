@@ -30,6 +30,7 @@ th {
 }
 tbody{
     background-color: rgb(191, 191, 224);
+    padding: 20px;
 }
 
 .form {
