@@ -25,12 +25,16 @@ table {
 }
 th {
     background-color: grey;
-    padding: 10px;
+    padding: 5px;
     border: solid 1px black;
 }
 tbody{
     background-color: rgb(191, 191, 224);
-    padding: 20px;
+    padding: 10px;
+    border: solid 1px black;
+}
+td {
+    border: solid 1px black;
 }
 
 .form {
@@ -51,9 +55,10 @@ input[type='text'], [type='number'] {
 }
 
 button {
-    padding: 5px;
+    padding: 3px;
     border-radius: 10px;
     width: 100px;
-    font-size: 20px;
-    background-color: rgb(166, 166, 219);
+    font-size: 17px;
+    background-color: rgba(248, 238, 238, 0.979);
+    margin-bottom: 5px;
 }
