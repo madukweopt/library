@@ -7,33 +7,29 @@ const submit = document.querySelector('.submit');
 let title = document.querySelector('#title');
 let author = document.querySelector('#author');
 let page = document.querySelector('#pages');
-let myLibrary = [
-  {
-    title: 'Rich Dad and Poor Dad',
-    author: 'Robert Kiyosaki',
-    pages: '350',
-    comment: true
-  }
-];
-
-
-
+let myLibrary = [];
 
 addButton.addEventListener('click', displayForm)
 returnBtn.addEventListener('click', returnToTable)
 submit.addEventListener('click', getUserInput)
-submit.addEventListener('click', displayArray)
+submit.addEventListener('click', displayBook)
 
 function displayForm() {
+  tableBody.innerHTML = ''
     form.classList.add('form')
     form.classList.remove('hide');
     main.style.display = 'none'
+    title.value = ''
+  author.value = ''
+  page.value = ''
+  newBook = ''
   
 }
 
 function returnToTable() {
     form.classList.add('hide')
-    main.style.display = 'unset'
+    main.style.display = 'initial'
+    displayBook()
 
 }
 
@@ -57,7 +53,6 @@ function getUserInput() {
   author.value = ''
   page.value = ''
   newBook = ''
-
   }
   
 function getReadValue() {
@@ -66,49 +61,58 @@ function getReadValue() {
   }
 
   // displays myLibrary array of objects on the html table
- function displayArray() {
+function displayBook() {
   tableBody.innerHTML = ''
-  main.style.display = 'initial'
-
-  for (let library of myLibrary) {
-    let tableRow = document.createElement('tr');
-    let tableData1 = document.createElement('td');
-    tableData1.textContent = library.title;
-    tableRow.appendChild(tableData1);
-
-    let tableData2 = document.createElement('td');
-    tableData2.textContent = library.author;
-    tableRow.appendChild(tableData2);
-
-    let tableData3 = document.createElement('td');
-    tableData3.textContent = library.pages;
-    tableRow.appendChild(tableData3);
-
-    let tableData4 = document.createElement('td');
-    tableData4.textContent = library.comment;
-    tableRow.appendChild(tableData4);
-
-    let editBtn = document.createElement('td');
-    let editBtnTd = document.createElement('button');
-    editBtnTd.textContent = 'Edit';
-    editBtn.appendChild(editBtnTd);
-    tableRow.appendChild(editBtn)
-
-    let deleteBtn = document.createElement('td') 
-    let deleteBtnTd = document.createElement('button')
-    deleteBtnTd.textContent = 'Delete';
-    deleteBtn.appendChild(deleteBtnTd);
-    tableRow.appendChild(deleteBtn);
-
-    tableBody.appendChild(tableRow);
-    form.classList.add('hide');
-   
-  console.log(myLibrary)
-  }
-
- } 
- 
   
+  main.style.display = 'initial'
+  form.classList.add('hide');
+  const bookTable = document.querySelector('tbody')
+  bookTable.innerHTML = ''
+  
+  for (let bookIndex in myLibrary) {
+      const bookRow = document.createElement('tr');
+      
+      for (let attrIndex in myLibrary[bookIndex]) {
+          const cell = document.createElement('td');
+          console.log(cell)
+          cell.textContent = myLibrary[bookIndex][attrIndex];
+          bookRow.appendChild(cell);  
+      }
+      
+          const editBtn = document.createElement('td');
+          editBtn.textContent = 'Edit';
+          editBtn.addEventListener('click', function(ev) {
+          displayForm()
+          title.value = myLibrary[bookIndex].title
+          author.value = myLibrary[bookIndex].author
+          page.value = myLibrary[bookIndex].pages
+            
+              if(ev.currentTarget.id == 'submit'){
+                myLibrary.splice(bookIndex, 1);
+                bookTable.innerHTML = ""
+            
+              }else if(ev.currentTarget.id == 'return'){
+              form.classList.add('hide')
+              main.style.display = 'initial'
+              
+              displayBook()
+              bookTable.innerHTML = ""
+              
+              }
 
+             })              
 
+          const deleteBtn = document.createElement('td');
+          deleteBtn.textContent = 'Delete';
+          
+          deleteBtn.addEventListener('click', function() {
+            myLibrary.splice(bookIndex, 1);
+            displayBook()
+          
+          })
+      bookRow.appendChild(editBtn);
+      bookRow.appendChild(deleteBtn);  
+      bookTable.appendChild(bookRow)
+ }
 
+}
