@@ -33,29 +33,31 @@
             </table>
         </main>
         <div class="form hide">
+           
             <div>Add or Edit Your Books</div>
             <div>
             <label for="tittle">Title:</label><br>
-             <input type="text" name="title" id="title">
+             <input type="text" name="title" id="title" required>
             </div>
 
             <div>
             <label for="author">Author:</label><br>
-             <input type="text" name="author" id="author">
+             <input type="text" name="author" id="author" required>
             </div>
 
             <div>
             <label for="pages">Pages:</label><br>
-             <input type="number" name="pages" id="pages">
+             <input type="number" name="pages" id="pages" required>
             </div>
             <div>
             Read Book?
-           
-             <input type="radio" name="read-book" id="yes" value="yes">
+                      
             <label for="yes">Yes</label>
+            <input type="radio" name="read-book" id="yes" value="yes">
 
-             <input type="radio" name="read-book" id="no" value="no">
             <label for="no">No</label>
+             <input type="radio" name="read-book" id="no" value="no">
+            
             <div><br>
                 
             <button class="submit">Submit</button>

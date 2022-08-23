@@ -15,15 +15,21 @@ submit.addEventListener('click', getUserInput)
 submit.addEventListener('click', displayBook)
 
 function displayForm() {
+  
   tableBody.innerHTML = ''
     form.classList.add('form')
     form.classList.remove('hide');
     main.style.display = 'none'
-    title.value = ''
+    returnBtn.style.display = 'initial';
+    clearForm()
+  
+}
+
+function clearForm() {
+ title.value = ''
   author.value = ''
   page.value = ''
   newBook = ''
-  
 }
 
 function returnToTable() {
@@ -49,10 +55,8 @@ function getUserInput() {
   let commentValue = getReadValue();
   let newBook = new Book(titleText, authorText, pageNumber, commentValue);
   myLibrary.push(newBook);
-  title.value = ''
-  author.value = ''
-  page.value = ''
-  newBook = ''
+  clearForm()
+
   }
   
 function getReadValue() {
@@ -62,12 +66,13 @@ function getReadValue() {
 
   // displays myLibrary array of objects on the html table
 function displayBook() {
+
   tableBody.innerHTML = ''
-  
   main.style.display = 'initial'
   form.classList.add('hide');
   const bookTable = document.querySelector('tbody')
   bookTable.innerHTML = ''
+  
   
   for (let bookIndex in myLibrary) {
       const bookRow = document.createElement('tr');
@@ -78,36 +83,27 @@ function displayBook() {
           cell.textContent = myLibrary[bookIndex][attrIndex];
           bookRow.appendChild(cell);  
       }
-      
+      // attach edit button to DOM and add eventlistener to it
           const editBtn = document.createElement('td');
+          editBtn.setAttribute('class', 'edit-btn')
           editBtn.textContent = 'Edit';
           editBtn.addEventListener('click', function(ev) {
           displayForm()
+          returnBtn.style.display = 'none'
           title.value = myLibrary[bookIndex].title
           author.value = myLibrary[bookIndex].author
           page.value = myLibrary[bookIndex].pages
-            
-              if(ev.currentTarget.id == 'submit'){
-                myLibrary.splice(bookIndex, 1);
-                bookTable.innerHTML = ""
-            
-              }else if(ev.currentTarget.id == 'return'){
-              form.classList.add('hide')
-              main.style.display = 'initial'
-              
-              displayBook()
-              bookTable.innerHTML = ""
-              
-              }
-
-             })              
-
-          const deleteBtn = document.createElement('td');
-          deleteBtn.textContent = 'Delete';
+          myLibrary.splice(bookIndex, 1);
           
+             })
+                           
+      // append delete button to DOM and add eventlistener to it
+          const deleteBtn = document.createElement('td');
+          deleteBtn.setAttribute('class', 'delete-btn')
+          deleteBtn.textContent = 'Delete'; 
           deleteBtn.addEventListener('click', function() {
-            myLibrary.splice(bookIndex, 1);
-            displayBook()
+          myLibrary.splice(bookIndex, 1);
+          displayBook()
           
           })
       bookRow.appendChild(editBtn);
