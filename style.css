@@ -21,6 +21,7 @@ table {
     width: 70%;
     border-collapse: collapse;
     
+    
 
 }
 th {
@@ -34,6 +35,7 @@ tbody{
     padding: 10px;
     font-size: 20px;
     border: solid 1px black;
+   
 }
 td {
     border: solid 1px black;
@@ -67,8 +69,13 @@ button {
 .edit-btn {
     background-color: purple;
     color: white;
+    border-radius: 15px;
+    cursor: crosshair;
+    
 }
 .delete-btn {
     background-color: red;
     color: white;
+    border-radius: 15px;
+    cursor: crosshair;
 }
